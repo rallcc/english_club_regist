@@ -41,7 +41,7 @@ form.addEventListener('submit', async (e) => {
     const formData = new FormData(form);
     const data = {
         full_name: formData.get('fullName'),
-        student_class: formData.get('class'),
+        class: formData.get('class'),
         phone: formData.get('phone'),
         division: formData.get('division'),
         reason: formData.get('reason'),
