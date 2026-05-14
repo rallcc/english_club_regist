@@ -29,7 +29,7 @@ form.addEventListener('submit', async (e) => {
 
     // 1. Validasi awal
     if (!supabaseClient) {
-        showStatusMessage('Koneksi database gagal. Periksa konfigurasi.', 'error');
+        showStatusMessage('Database connection failed. Check configuration.', 'error');
         return;
     }
 
@@ -57,12 +57,12 @@ form.addEventListener('submit', async (e) => {
         if (error) throw error;
 
         // 5. Success State
-        showStatusMessage('Registrasi berhasil! Sampai jumpa di English Club.', 'success');
+        showStatusMessage('Registration success!. See you in the club.', 'success');
         form.reset();
 
     } catch (error) {
         console.error('Error submitting form:', error);
-        showStatusMessage(error.message || 'Terjadi kesalahan. Coba lagi nanti.', 'error');
+        showStatusMessage(error.message || 'Error. Please try again later.', 'error');
     } finally {
         // 6. UI State: Selesai
         setLoadingState(false);
