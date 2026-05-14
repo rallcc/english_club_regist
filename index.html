@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Registration form for English Club">
+    <title>English Club</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Supabase JS Client (v2) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        tally: {
+                            bg: '#fdfbf7',
+                            border: '#d1d5db',
+                            text: '#1b365d',
+                            muted: '#64748b',
+                            focus: '#1b365d'
+                        },
+                        brand: {
+                            DEFAULT: '#1b365d',
+                            hover: '#15294a',
+                            accent: '#f6c358'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-tally-bg text-tally-text font-sans antialiased min-h-screen selection:bg-brand-accent selection:text-brand">
+    
+    <main class="w-full max-w-[600px] mx-auto px-6 py-16 md:py-24">
+        
+        <header class="mb-10">
+            <div class="flex items-center gap-4 mb-4">
+                <img src="logo.jpeg" alt="English Club Logo" class="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover border-2 border-brand shadow-sm">
+                <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-brand">English Club</h1>
+            </div>
+            <p class="text-tally-muted text-base md:text-lg">Join dong!</p>
+        </header>
+
+        <form id="registrationForm" class="space-y-6">
+            <!-- Full Name -->
+            <div>
+                <label for="fullName" class="block text-base font-medium mb-2">Full Name *</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Type your answer here..." required
+                    class="w-full bg-white border border-tally-border rounded-xl px-4 py-3.5 text-base placeholder-gray-400 focus:outline-none focus:border-tally-focus focus:ring-1 focus:ring-tally-focus transition-colors shadow-sm">
+            </div>
+
+            <!-- Class / Kelas -->
+            <div>
+                <label for="class" class="block text-base font-medium mb-2">Class *</label>
+                <input type="text" id="class" name="class" placeholder="e.g. X AKL 1" required
+                    class="w-full bg-white border border-tally-border rounded-xl px-4 py-3.5 text-base placeholder-gray-400 focus:outline-none focus:border-tally-focus focus:ring-1 focus:ring-tally-focus transition-colors shadow-sm">
+            </div>
+            
+            <!-- Phone Number -->
+            <div>
+                <label for="phone" class="block text-base font-medium mb-2">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="+62..." required
+                    class="w-full bg-white border border-tally-border rounded-xl px-4 py-3.5 text-base placeholder-gray-400 focus:outline-none focus:border-tally-focus focus:ring-1 focus:ring-tally-focus transition-colors shadow-sm">
+            </div>
+
+            <!-- Division -->
+            <div>
+                <label for="division" class="block text-base font-medium mb-2">English Division *</label>
+                <div class="relative">
+                    <select id="division" name="division" required
+                        class="w-full bg-white border border-tally-border rounded-xl px-4 py-3.5 text-base appearance-none focus:outline-none focus:border-tally-focus focus:ring-1 focus:ring-tally-focus transition-colors shadow-sm">
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="Debate">Debate</option>
+                        <option value="Sing a Song">Sing a Song</option>
+                        <option value="Speech and Poem">Speech and Poem</option>
+                        <option value="Storytelling">Storytelling</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                        <svg class="h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reason -->
+            <div>
+                <label for="reason" class="block text-base font-medium mb-2">Why do you want to join? *</label>
+                <textarea id="reason" name="reason" rows="3" placeholder="Type your answer here..." required
+                    class="w-full bg-white border border-tally-border rounded-xl px-4 py-3.5 text-base placeholder-gray-400 focus:outline-none focus:border-tally-focus focus:ring-1 focus:ring-tally-focus transition-colors shadow-sm resize-y min-h-[120px]"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="pt-4">
+                <button type="submit" id="submitBtn" 
+                    class="bg-brand hover:bg-brand-hover text-white font-medium rounded-xl px-8 py-3.5 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center min-w-[140px] shadow-md hover:shadow-lg">
+                    <span class="btn-text">Submit</span>
+                    <div class="loader hidden flex items-center justify-center">
+                        <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+
+            <div id="statusMessage" class="hidden rounded-xl p-4 text-sm font-medium transition-colors"></div>
+        </form>
+        
+    </main>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
