@@ -1,0 +1,8 @@
+# Environment / Secret Configuration
+config.js
+
+# OS / Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
